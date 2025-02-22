@@ -85,7 +85,19 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    const copyQuestion = {
+        ...question,
+        name: "# " + question.name + "\n",
+    };
+    if (copyQuestion.type === "multiple_choice_question") {
+        return (
+            copyQuestion.name +
+            copyQuestion.body +
+            "\n" +
+            copyQuestion.options.map((x) => "- " + x).join("\n")
+        );
+    }
+    return copyQuestion.name + copyQuestion.body + copyQuestion.options;
 }
 
 /**

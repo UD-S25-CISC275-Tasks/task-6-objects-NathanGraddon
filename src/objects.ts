@@ -46,7 +46,14 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    return false;
+    const check = { ...question };
+    if (
+        check.type === "multiple_choice_question" &&
+        !check.options.includes(answer)
+    ) {
+        return false;
+    }
+    return true;
 }
 
 /**
